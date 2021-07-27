@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Single Article's
+{% endblock %}
+{% block content %}
+	<section class="hero-wrap hero-wrap-2">
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 text-center ftco-animate pt-5">
+					<h1 class="mb-3 bread">Our Blog</h1>
+					<p class="breadcrumbs"><span class="mr-2"><a href="index-2.html">Home <i
+									class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a
+								href="blog.html">Blog <i class="fa fa-chevron-right"></i></a></span> <span>Blog
+							Details<i class="fa fa-chevron-right"></i></span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ftco-section">
+		<div class="container-fluid px-md-4">
+			<div class="row no-gutters">
+				<div class="col-md-12 blog-wrap">
+						<div class="row no-gutters align-items-center">
+							<div class="col-md-6 img img-blog js-fullheight"
+								style="background-image:url({{ single.image.url }})">
+							</div>
+							<div class="col-md-6">
+								<div class="text p-md-5 py-5 px-4 ftco-animate">
+									<p class="meta">
+										<a href="#"><span class="fa fa-calendar mr-2"></span>{{ single.posted_on }}</a>
+										<a href="#"><span class="fa fa-user mr-2"></span>{{ single.article_author.name }}</a>
+										<a href="#" class="meta-chat"><span class="fa fa-comment mr-2"></span> {{ single.article_author.id }}</a>
+									</p>
+									<h2 class="mb-4"><a href="blog-single.html">{{ single.title }}</a></h2>
+									<div class="icon d-flex align-items-center">
+										<div class="img"
+											style="background-image:url({{ single.article_author.profile_picture.url }})">
+										</div>
+										<div class="position pl-3">
+											<h4 class="mb-0">{{ single.article_author.name.get_full_name }}</h4>
+											<span>{{ single.article_author.category }}</span>
+										</div>
+									</div>
+									<p>{{single.body}}</p>
+								</div>
+							</div>
+						</div>
+					<div class="row justify-content-center pt-4 py-md-5">
+						<div class="col-md-7">
+							<div class="comment-post py-5">
+								<h3 class="mb-5">Comments</h3>
+								<ul class="comment-list">
+									<li class="comment">
+										<div class="comment-body">
+											{% for comment in show_comment %}
+												<h3>{{ comment.name.get_full_name }}</h3>
+												<div class="meta">{{ comment.comment_posted_on|timesince }}</div>
+												<p>{{ comment.body }}</p>
+												<p><a href="#" class="reply">Reply</a></p>
+											{% endfor %}
+										</div>
+									</li>
+							<div class="comment-form-wrap pt-5">
+								<h3 class="mb-5">Leave a comment</h3>
+								<form action="#" class="p-5 comment-form" method="POST">
+									{% csrf_token %}
+									{{ form.as_p }}
+									<button class="btn btn-success">Submit</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

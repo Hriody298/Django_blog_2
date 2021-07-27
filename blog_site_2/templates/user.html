@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Author Table
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2> List of all User's:</h2>
+</div>
+<div class="container">
+    <a href="{% url 'register' %}" class="btn btn-primary pull pull-right">Register for new account</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in users %}
+            <tr>
+                <td>{{ obj.username }}</td>
+                <td>{{ obj.first_name }}</td>
+                <td>{{ obj.last_name }}</td>
+                <td>{{ obj.email }}</td>
+                <td><a href="{% url 'update_user' nid=obj.id %}" class="btn btn-warning">Edit</a>||<a href="{% url 'delete_user' nid=obj.id %}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

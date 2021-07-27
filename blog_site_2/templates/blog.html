@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Article's
+{% endblock %}
+{% block content %}
+	<section class="hero-wrap hero-wrap-2">
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 text-center ftco-animate pt-5">
+					<h1 class="mb-3 bread">Django Blogsite 2.0</h1>
+					<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home <i
+									class="fa fa-chevron-right"></i></a></span> <span>Blog <i
+								class="fa fa-chevron-right"></i></span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ftco-section">
+		<div class="container-fluid">
+			<div class="row">
+				{% for obj in blog_post %}
+					<div class="col-md-6 col-lg-4 blog-wrap blog-wrap-2 px-md-5 ftco-animate">
+						<a href="{% url 'blog-single' pid=obj.id %}" class="img img-blog w-100 border d-block"
+							style="background-image:url({{ obj.image.url }})">
+						</a>
+						<div class="text text-2 py-4 p-0 ftco-animate">
+							<p class="meta">
+								<a href="#"><span class="fa fa-calendar mr-2"></span>{{ obj.posted_on }}</a>
+								<a href="#"><span class="fa fa-user mr-2"></span>{{ obj.article_author.name }}</a>
+								<a href="#" class="meta-chat"><span class="fa fa-comment mr-2"></span> {{ obj.article_author.id }}</a>
+							</p>
+							<h2 class="mb-4"><a href="{% url 'blog-single' pid=obj.id %}">{{ obj.title }}</a></h2>
+							<div class="icon d-flex align-items-center">
+								<div class="img"
+									style="background-image:url({{ obj.article_author.profile_picture.url }})"></div>
+								<div class="position pl-3">
+									<h4 class="mb-0">{{ obj.article_author.name.get_full_name }}</h4>
+									<span>{{ obj.category }}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="row mt-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li><a href="#">&lt;</a></li>
+							<li class="active"><span>1</span></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&gt;</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}
